@@ -6,7 +6,7 @@ RIT ID: nd9565
 
 tmp Covert Channel Assignment
 
-## **Desctiption**
+## **Description**
 
 The system mainly consists of two python scripts:
 
@@ -19,6 +19,16 @@ The *tmp_cc_receiver.py* script will read the value from the *.txt* file created
 
 ## **How to Run?**
 
+Before testing, please make sure that your */tmp* directory does not consist of any directory named *DSR* and/or *DRD*, else the scripts might not work.
+
+If there are any of these directories present, type in the following command to remove them:
+
+```raw
+> rm -r /tmp/DSR
+```
+
+*Replace DSR with DRD in the above command to remove DRD directory*
+
 To test the scripts in your local environment, follow these steps:
 
 * First execute the *tmp_cc_sender.py* script. You can run the script by typing in the following command:
@@ -28,6 +38,12 @@ To test the scripts in your local environment, follow these steps:
 ```
 
 This will prompt you to enter your message. It will notify the user when the message is completely received by the receiver.
+
+*NOTE 1:* You can enter message with special characters too. I haven't tested the maximum length of the message that my program can handle and you are free to test it.
+
+*For example, here is a sample message which you can try: "Hello, Friend! E-Corp is ours."*
+
+*NOTE 2:* The longer the message, the longer it will take to transmit. Since I have not kept any progress indicators, it might look like the program froze, but please have patience and wait till it finishes execution. Alternatively, you can try with a shorter message first to test the program.
 
 * Without closing the *tmp_cc_sender.py* script, run *tmp_cc_receiver.py* script parallely. Type in the following command to do so:
 

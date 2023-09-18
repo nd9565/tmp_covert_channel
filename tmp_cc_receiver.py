@@ -16,9 +16,9 @@ while True:
 	# If present, then it means that Receiver should wait for Sender to delete DSR
 	while True:
 		if(os.path.exists("/tmp/DSR") and os.path.exists("/tmp/DRD")):
-			print("Waiting for Sender to delete DSR...")
-			time.sleep(3)
-			continue
+			#print("Waiting for Sender to delete DSR...")
+			time.sleep(1)
+			#pass
 		else:
 			break
 	
@@ -28,7 +28,7 @@ while True:
 	if(os.path.exists("/tmp/DRD") and not os.path.exists("/tmp/DSR")):
 		cmd_remove_DRD = "rm -r /tmp/DRD"
 		os.system(cmd_remove_DRD)
-		print("Deleted DRD...")
+		#print("Deleted DRD...")
 	
 	# Check if only DSR is present and DRD is absent
 	# If so, it means that Receiver should read the data
@@ -44,18 +44,18 @@ while True:
 		ascii_filename = files[0].split(".txt")[0] # Extracting ASCII value from filename
 		covert_char = chr(int(ascii_filename)) # Converting ASCII value to respective character
 		decoded_msg += covert_char
-		print("Read " + covert_char)
+		#print("Read " + covert_char)
 		cmd_create_DRD = "mkdir /tmp/DRD" # Create DRD once the data is read
 		os.system(cmd_create_DRD)
-		print("Created DRD, inside loop")
+		#print("Created DRD, inside loop")
 	
 	# Check if both DSR and DRD are absent
 	# If so, then the receiver should wait for Sender to create DSR
 	while True:
 		if((not os.path.exists("/tmp/DSR")) and (not os.path.exists("/tmp/DRD"))):
-			print("Waiting for Sender to create DSR...")
-			time.sleep(3)
-			continue
+			#print("Waiting for Sender to create DSR...")
+			time.sleep(1)
+			#pass
 		else:
 			break
 
@@ -63,13 +63,13 @@ while True:
 # First, check whether DSR is deleted. If deleted, then delete DRD too.
 while True:
 	if(os.path.exists("/tmp/DSR")):
-		print("Out of loop. Waiting for DSR to be deleted...")
-		time.sleep(3)
-		continue
+		#print("Out of loop. Waiting for DSR to be deleted...")
+		time.sleep(1)
+		#pass
 	else:
 		cmd_remove_DRD_end = "rm -r /tmp/DRD"
 		os.system(cmd_remove_DRD_end)
-		print("Deleted DRD, outside loop")
+		#print("Deleted DRD, outside loop")
 		break
 
 # Now, communication has officially ended and decoded message can be printed

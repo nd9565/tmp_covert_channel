@@ -19,9 +19,9 @@ for i in range (len(msg)):
 	# If it is set, wait until the receiver removes it
 	while True:
 		if(os.path.exists("/tmp/DRD")):
-			print("Waiting for Receiver to delete DRD...")
-			time.sleep(3)
-			continue
+			#print("Waiting for Receiver to delete DRD...")
+			time.sleep(1)
+			#pass
 		else:
 			break
 	
@@ -32,36 +32,46 @@ for i in range (len(msg)):
 	# Execute the command to create this file
 	cmd_create_covert_file = "mkdir /tmp/DSR && touch /tmp/DSR/" + covert_file_name 
 	os.system(cmd_create_covert_file)
-	print("Sent " + msg[i])
+	#print("Sent " + msg[i])
 	
 	# Now, wait for the receiver to read the data and create DRD directory
 	while True:
-		if(os.path.exists("tmp/DRD")):
+		if(os.path.exists("/tmp/DRD")):
 			cmd_remove_covert_file = "rm -r /tmp/DSR"
 			os.system(cmd_remove_covert_file)
-			print("Deleted DSR, inside loop")
-			print(msg[i] + " read by receiver...")
+			#print("Deleted DSR, inside loop")
+			#print(msg[i] + " read by receiver...")
 			break
 		else:
-			print("Waiting for Receiver to read " + msg[i])
-			time.sleep(3)
-			continue
+			#print("Waiting for Receiver to read " + msg[i])
+			time.sleep(1)
+			#pass
+
+# Wait for Receiver to acknowledge the last character
+while True:
+	if(os.path.exists("/tmp/DRD")):
+		#print("Waiting for Receiver to acknowledge last char...")
+		time.sleep(1)
+		#pass
+	else:
+		break
 	
 # Finally, send the message to end the communication
 # I did it by creating an empty directory
 cmd_end_communication = "mkdir /tmp/DSR"
 os.system(cmd_end_communication)
+#print("Initiated end!")
 
 # Now, wait for the receiver to acknowledge this
 while True:
-	if(os.path_exists("tmp/DRD")):
+	if(os.path.exists("/tmp/DRD")):
 		cmd_remove_directory = "rm -r /tmp/DSR"
 		os.system(cmd_remove_directory)
-		print("Deleted DSR")
+		#print("Deleted DSR")
 		break
 	else:
-		print("Waiting for Receiver to acknowledge the end...")
-		time.sleep(3)
-		continue
+		#print("Waiting for Receiver to acknowledge the end...")
+		time.sleep(1)
+		#pass
 
 print("Your secret message is sent successfully! Check the receiver output to see the message!")
